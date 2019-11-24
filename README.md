@@ -4,4 +4,4 @@
 
 - En utilisant la méthode getExtension de la librairie org.apache.commons.io : 
 
-
+ok :)
