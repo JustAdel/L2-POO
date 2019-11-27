@@ -1,10 +1,10 @@
 package infos;
 
 import org.apache.commons.io.FilenameUtils;
-
+import org.apache.tika.Tika;
 /**
  * @author Adel
- * C'est juste une classe test pour voir comment utiliser des classes non natives de java
+ * 
  * 
  */
 public class Extension {
@@ -13,8 +13,13 @@ public class Extension {
 	 * @return file a extension. If the file has no extension, this method will return an empty string.
 	 * If the filename is only an extension, this method will return the String after the dot.
 	 */
-	public String getExtensionByApacheCommonLib(String filename) {
+	public String getExtensionUsingApacheCommonLib(String filename) {
 	    return FilenameUtils.getExtension(filename);
 	    
+	}
+		
+	public String getMimeUsingTika(String fileName){
+		Tika tika = new Tika();
+		return tika.detect(fileName);
 	}
 }
