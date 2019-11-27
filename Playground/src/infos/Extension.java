@@ -4,6 +4,7 @@ import org.apache.commons.io.FilenameUtils;
 
 /**
  * @author Adel
+ * C'est juste une classe test pour voir comment utiliser des classes non natives de java
  * 
  */
 public class Extension {
