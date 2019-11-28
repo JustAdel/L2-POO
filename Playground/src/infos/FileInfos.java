@@ -7,7 +7,7 @@ import org.apache.tika.Tika;
  * 
  * 
  */
-public class Extension {
+public class FileInfos {
 	/**
 	 * @param filename, it can be either a filename, or a path.
 	 * @return file a extension. If the file has no extension, this method will return an empty string.
