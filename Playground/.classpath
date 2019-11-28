@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="C:/Users/Adel/Downloads/commons-io-2.6-bin/commons-io-2.6/commons-io-2.6.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Adel/Downloads/jar_files/javax.activation-1.2.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Adel/Downloads/tika-app-1.22.jar"/>
+	<classpathentry kind="lib" path="C:/Users/paulb/Downloads/commons-io-2.6-bin/commons-io-2.6/commons-io-2.6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
