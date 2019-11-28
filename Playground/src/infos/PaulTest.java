@@ -2,9 +2,8 @@ package infos;
 
 public class PaulTest {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	private int x;
+	public PaulTest() {
 		System.out.println("svp");
 	}
-
 }
