@@ -1,6 +1,6 @@
 package infos;
 
-public class TestFileInfos {
+public class TestExtension {
 
 	public static void main(String[] args) {
 		String test = "test.txt";
