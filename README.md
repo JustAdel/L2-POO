@@ -7,7 +7,7 @@
 ## Retourner le type MIME d'un fichier
 - En utilisant detect(String filename) de la librairie org.apache.tika : ok
 
-## Liste de signature
+## Liste de signatures
 - ok
 
 ## Identification de la signature d'un fichier
