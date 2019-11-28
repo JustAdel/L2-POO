@@ -10,7 +10,7 @@ public class TestFileInfos {
 		//Test du passage d'une commande en paramêtres
 		Command testCommand = new Command(args);
 		try {
-			System.out.println(testCommand.instruction());
+			testCommand.runCommand();
 		}catch (UnknownCommandException uce){
 			System.err.println(uce.getMessage());
 		}

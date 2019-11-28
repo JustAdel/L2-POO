@@ -8,20 +8,25 @@ public class Command {
 
 	}
 
-	public String instruction() throws UnknownCommandException {
-		String tmp = "";
+	public void runCommand() throws UnknownCommandException {
 		for (String s : commands) {
 			switch (s.toLowerCase()) {
 			case "-f":
-				tmp += "c'est l'analyse d'un fichier que vous souhaitez lancer\n";
+				fileAnalysis();
 				break;
 			case "-h":
-				tmp += "Liste de commande :\n";
+				help();
 				break;
 			default:
 				throw new UnknownCommandException(s);
 			}
 		}
-		return tmp;
+	}
+	
+	public void fileAnalysis() throws IllegalArgumentException{
+		
+	}
+	public void help() {
+		
 	}
 }
