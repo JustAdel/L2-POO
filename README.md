@@ -8,7 +8,7 @@
 - En utilisant detect(String filename) de la librairie org.apache.tika : ok
 
 ## Liste de signature
--ok
+- ok
 
 ## Identification de la signature d'un fichier
 - En cours
