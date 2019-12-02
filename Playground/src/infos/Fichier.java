@@ -84,7 +84,7 @@ public class Fichier {
 
 
 		Iterator<String> iter = tab.iterator();
-		while (iter.hasNext()) {
+		while (iter.next()!=this.extension) {
 			testExt=iter.next();
 			if (testExt.equals(this.extension)) {
 				System.out.println(testExt + "  est l'extension de votre fichier\n");
@@ -93,6 +93,8 @@ public class Fichier {
 
 				System.out.println((testSign=iter.next()) + "  est la signature censee apparaitre dans votre fichier\n");
 			}
+			if (!iter.hasNext() || testExt.equals(this.extension))
+				break;
 
 		}
 		if (testMime.equals(""))
