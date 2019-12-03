@@ -6,7 +6,7 @@ public class TestFileInfos {
 		Command consoleInput = new Command(args);
 		try {
 			consoleInput.runCommand();
-		}catch(UnknownCommandException e) {
+		} catch (UnknownCommandException e) {
 			System.err.println(e.getMessage());
 		}
 	}
