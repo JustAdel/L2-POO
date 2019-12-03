@@ -55,4 +55,6 @@ public class Analysis {
 	public Boolean checkMime() {
 		return extensionInfos[1].equals(file.getMimeType());
 	}
+	
+	
 }
