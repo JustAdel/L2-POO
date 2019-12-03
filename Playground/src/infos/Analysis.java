@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * @author Adel
@@ -18,7 +19,7 @@ public class Analysis {
 	public Analysis(File file) {
 		this.file = file;
 		try {
-			extensionInfos = findExtensionInfosInDatabase();
+			extensionInfos = searchExtensionInfosInDatabase();
 		}catch (ExtensionNotFoundException e) {
 			System.err.println(e.getMessage());
 		}
@@ -28,7 +29,7 @@ public class Analysis {
 	 * @return the appropriate line of the database as a String array.
 	 * @throws ExtensionNotFoundException
 	 */
-	public String[] findExtensionInfosInDatabase() throws ExtensionNotFoundException {
+	public String[] searchExtensionInfosInDatabase() throws ExtensionNotFoundException {
 		String line, fields[] = null;
 		Boolean foundExtensionInDatabase = false;
 		try {
@@ -56,5 +57,21 @@ public class Analysis {
 		return extensionInfos[1].equals(file.getMimeType());
 	}
 	
-	
+	public Boolean searchSignatureInFile() {
+		boolean foundSignature = false;
+		Scanner in = null;
+        try {
+            in = new Scanner(new FileReader(file.getFileName()));
+            while(in.hasNextLine() && !foundSignature) {
+                foundSignature = in.nextLine().indexOf(extensionInfos[2]) >= 0;
+            }
+        }
+        catch(IOException e) {
+            e.printStackTrace();      
+        }
+        finally {
+            try { in.close() ; } catch(Exception e) { /* ignore */ }  
+        }
+        return foundSignature;
+	}
 }

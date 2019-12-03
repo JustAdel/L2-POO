@@ -39,7 +39,7 @@ public class Command {
 		Analysis fileAnalysis = new Analysis(file);
 		try {
 			String tmp = "";
-			String[] result = fileAnalysis.findExtensionInfosInDatabase();
+			String[] result = fileAnalysis.searchExtensionInfosInDatabase();
 			for (int index = 0; index < result.length; index++) {
 				tmp += result[index] + "\t";
 			}
