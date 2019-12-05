@@ -22,8 +22,9 @@ public class Folder {
 			for (File file : fileInfos) {
 				if (file.isDirectory()) {
 					remplissage(file.getPath());
+				}else {
+					files.add(file);
 				}
-				files.add(file);
 			}
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
