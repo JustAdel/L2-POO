@@ -26,6 +26,7 @@ public class Command {
 				throw new UnknownCommandException(commands[0]);
 			}
 		} else {
+			System.out.println("Merci d'entrer des paramêtres.");
 			help();
 		}
 	}
