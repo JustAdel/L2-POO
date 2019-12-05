@@ -35,6 +35,10 @@ public class Folder {
 		}
 	}
 
+	public ArrayList<FileInfo> getArray() {
+		return arrayFileInfo;
+	}
+	
 	public String toString() {
 		Iterator<FileInfo> iter = this.arrayFileInfo.iterator();
 		String res = "Votre dossier " +this.D + " contient les fichiers suivants :\n\n ";
