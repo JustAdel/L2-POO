@@ -17,7 +17,7 @@
 - ok
 
 ## Analyse d'un dossier
--ok
+- ok
 
 ## Sauvegarde du résultat en mode console
 - à venir
