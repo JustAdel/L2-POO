@@ -55,6 +55,7 @@ public class Command {
 		Folder folder = new Folder(folderName);
 		Iterator<File> iter = folder.getArray().iterator();
 		while (iter.hasNext()) {
+			System.out.println("-----------------------------");
 			fileAnalysis(iter.next().getPath());
 		}
 	}
