@@ -11,7 +11,13 @@
 - ok
 
 ## Identification de la signature d'un fichier
-- En cours
+- ok
 
 ## Parcourir l'arborescence pour lister les fichiers à analyser
-- En cours
+- ok
+
+## Analyse d'un dossier
+-ok
+
+## Sauvegarde du résultat en mode console
+- à venir
