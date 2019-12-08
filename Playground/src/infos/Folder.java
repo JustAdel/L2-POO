@@ -3,25 +3,29 @@ package infos;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.io.File;
+import java.io.FileNotFoundException;
 
 public class Folder {
-	private String folderName;
+	private File folder;
 	private ArrayList<File> files;
 
-	public Folder(String folderName) {
-		this.folderName = folderName;
-		files = new ArrayList<File>();
-		remplissage(this.folderName);
+	public Folder(String folderName) throws FileNotFoundException {
+		folder = new File(folderName);
+		if (folder.exists() && folder.isDirectory()) {
+			files = new ArrayList<File>();
+			remplissage(folder);
+		} else {
+			throw new FileNotFoundException(folderName + " was not found or is not a directory.");
+		}
 	}
 
-	public void remplissage(String folderName) // BOUCLE RECURSIVE
+	public void remplissage(File folder) // BOUCLE RECURSIVE
 	{
 		try {
-			File f = new File(folderName);
-			File[] fileInfos = f.listFiles();
+			File[] fileInfos = folder.listFiles();
 			for (File file : fileInfos) {
 				if (file.isDirectory()) {
-					remplissage(file.getPath()); //Folders are not added to the ArrayList.
+					remplissage(file); // Folders are not added to the ArrayList.
 				} else {
 					files.add(file);
 				}
@@ -37,7 +41,7 @@ public class Folder {
 
 	public String toString() {
 		Iterator<File> iter = files.iterator();
-		String res = "Votre dossier " + folderName + " contient les fichiers suivants :\n\n ";
+		String res = "Votre dossier " + folder.getName() + " contient les fichiers suivants :\n\n ";
 		while (iter.hasNext()) {
 			res += iter.next().toString() + "\n";
 		}

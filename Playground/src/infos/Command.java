@@ -43,7 +43,7 @@ public class Command {
 				// Si l'extension ne fait pas partie de la base de données, on ne dispose pas
 				// d'informations, l'analyse n'est pas effectuée:
 				// Les méthodes qui utilisent la base, ne sont pas appelées.
-				System.out.println("Database information: " + fileAnalysis.toString());
+				System.out.println("Available data: " + fileAnalysis.toString());
 				System.out.println("Matching MIME type: " + fileAnalysis.checkMime().toString());
 				System.out.println("Found file signature: " + fileAnalysis.searchSignatureInFile().toString());
 			}
@@ -53,11 +53,15 @@ public class Command {
 	}
 
 	public void folderAnalysis(String folderName) {
-		Folder folder = new Folder(folderName);
-		Iterator<File> iter = folder.getArray().iterator();
-		while (iter.hasNext()) {
-			System.out.println("-----------------------------");
-			fileAnalysis(iter.next().getPath());
+		try {
+			Folder folder = new Folder(folderName);
+			Iterator<File> iter = folder.getArray().iterator();
+			while (iter.hasNext()) {
+				fileAnalysis(iter.next().getPath());
+				System.out.println("-----------------------------");
+			}
+		} catch (FileNotFoundException e) {
+			System.err.println(e.getMessage());
 		}
 	}
 
