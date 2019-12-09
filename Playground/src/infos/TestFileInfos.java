@@ -1,5 +1,7 @@
 package infos;
 
+import java.io.File;
+
 public class TestFileInfos {
 
 	public static void main(String[] args) {
