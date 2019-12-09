@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
  * 
  * 
  */
+@SuppressWarnings("serial")
 public class FileInfo extends File {
 	private String fileExtension;
 	private String fileMimeType;
