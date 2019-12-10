@@ -10,16 +10,17 @@ import java.io.FileNotFoundException;
  * 
  * 
  */
-@SuppressWarnings("serial")
 public class FileInfo extends File {
 	private String fileExtension;
 	private String fileMimeType;
+	private long fileLength;
 
 	public FileInfo(String fileName) throws FileNotFoundException {
 		super(fileName);
 		if (this.exists() && this.isFile()) {
 			fileExtension = getExtensionUsingApacheCommonLib(getName());
 			fileMimeType = getMimeUsingTika(getName());
+			fileLength=length();
 		} else {
 			throw new FileNotFoundException(fileName + " was not found or is not a File.");
 		}
@@ -42,10 +43,14 @@ public class FileInfo extends File {
 	public String getMimeType() {
 		return fileMimeType;
 	}
+	
+	public boolean estVideFile() {
+		return fileLength==0;
+	}
 
 	public String toString() {
 		return "File name: " + super.getName() + "\nCharacteristics:\n" + "\tExtension: " + fileExtension
-				+ "\n\tMIME type: " + fileMimeType;
+				+ "\n\tMIME type: " + fileMimeType + "\n\tlength: " + fileLength + "\n";
 
 	}
 }

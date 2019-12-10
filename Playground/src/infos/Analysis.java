@@ -6,10 +6,11 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Analysis {
-	private static String DATABASE = "resources/signatures.csv";
+	private static String DATABASE = "C:\\mnt\\c\\Users\\Adel\\git\\L2-POO\\Playground\\resources\\signatures.csv";
 	public final static String SEPARATOR = ";";
 	protected FileInfo file;
 	private String[] extensionInfos;
+	private Boolean foundExtensionInDatabase;
 
 	public Analysis(FileInfo file) {
 		this.file = file;
@@ -26,7 +27,7 @@ public class Analysis {
 	 */
 	public String[] searchExtensionInfosInDatabase() throws ExtensionNotFoundException {
 		String line, fields[] = null;
-		Boolean foundExtensionInDatabase = false;
+		foundExtensionInDatabase = false;
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(DATABASE));
 			while (((line = reader.readLine()) != null) && (!foundExtensionInDatabase)) {
@@ -48,8 +49,12 @@ public class Analysis {
 		}
 	}
 
+	public Boolean foundExtensionInDatabase() {
+		return foundExtensionInDatabase;
+	}
+
 	public Boolean checkMime() {
-			return extensionInfos[1].equals(file.getMimeType());
+		return extensionInfos[1].equals(file.getMimeType());
 	}
 
 	public Boolean searchSignatureInFile() {
@@ -79,12 +84,20 @@ public class Analysis {
 	public String[] getExtensionInfos() {
 		return extensionInfos;
 	}
+
+	public FileInfo getFile() {
+		return file;
+	}
+
 	public String toString() {
-		String tmp = "";
+		String tmp = "FoundExtensionInDatabase : " + foundExtensionInDatabase + "\n";
 		if (extensionInfos != null) {
+			tmp += "Available data: ";
 			for (String str : extensionInfos) {
 				tmp += " " + str;
 			}
+			tmp += "\nMatching MIME type: " + checkMime().toString() + "\nFound file signature: "
+					+ searchSignatureInFile().toString() + "\n";
 		}
 		return tmp;
 	}
