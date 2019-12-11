@@ -97,8 +97,12 @@ public class Analysis {
 			for (String str : extensionInfos) {
 				tmp += " " + str;
 			}
-			tmp += "\nMatching MIME type: " + checkMime().toString() + "\nFound file signature: "
-					+ searchSignatureInFile().toString() + "\n";
+			tmp += "\nMatching MIME type: " + checkMime().toString();
+			if (!checkMime()) {
+				tmp += " ANOMALIE!";
+
+			}
+			tmp += "\nFound file signature: " + searchSignatureInFile().toString() + "\n";
 		}
 		return tmp;
 	}

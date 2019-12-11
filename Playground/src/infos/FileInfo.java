@@ -5,8 +5,6 @@ import org.apache.tika.Tika;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 /**
  * @author Adel
@@ -44,7 +42,6 @@ public class FileInfo extends File {
 			e.printStackTrace();
 		}
 		return tmp;
-
 	}
 
 	public String getFileExtension() {
