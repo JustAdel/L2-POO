@@ -41,9 +41,10 @@ public class Command {
 			analysisResult = new Result(fileAnalysis);
 			System.out.println(analysisResult.toString());
 			
-			if (commands.length == 4 && commands[2].equals("-s") ) 		
+			if (commands.length == 4 && commands[2].equals("-s") ) 		{
 				analysisResult.save(commands[3]+".txt");
 				analysisResult.serializationSave(commands[3]+".ser");
+			}
 
 		} catch (FileNotFoundException e) {
 			System.err.println(e.getMessage());
