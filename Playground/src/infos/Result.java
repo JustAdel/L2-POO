@@ -1,8 +1,13 @@
 package infos;
 
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+
+import td8.phonebook.Contact;
 
 public class Result {
 
@@ -21,6 +26,19 @@ public class Result {
 			writer.write(fileInfos + analysisResults);
 			writer.newLine();
 			writer.close();
+		} catch (IOException e) {
+			System.err.println(e.getMessage());
+		}
+	}
+	
+	public void serializationSave(String fileName) {
+		ObjectOutputStream stream;
+		try {
+			stream = new ObjectOutputStream(new FileOutputStream(fileName));
+			stream.writeObject(fileInfos + analysisResults);
+			stream.close();
+		} catch (FileNotFoundException e) {
+			System.err.println(e.getMessage());
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
 		}
