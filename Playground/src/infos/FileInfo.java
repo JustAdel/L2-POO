@@ -21,7 +21,7 @@ public class FileInfo extends File {
 		if (this.exists() && this.isFile()) {
 			fileExtension = getExtensionUsingApacheCommonLib(getName());
 			fileMimeType = getMimeUsingTika(getName());
-			fileLength=length();
+			fileLength = length();
 		} else {
 			throw new FileNotFoundException(fileName + " was not found or is not a File.");
 		}
@@ -34,11 +34,10 @@ public class FileInfo extends File {
 
 	public String getMimeUsingTika(String fileName) {
 		Tika tika = new Tika();
-		String tmp="";
+		String tmp = "";
 		try {
 			tmp = tika.detect(this.toPath());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return tmp;
@@ -51,9 +50,9 @@ public class FileInfo extends File {
 	public String getMimeType() {
 		return fileMimeType;
 	}
-	
+
 	public boolean estVideFile() {
-		return fileLength==0;
+		return fileLength == 0;
 	}
 
 	public String toString() {
