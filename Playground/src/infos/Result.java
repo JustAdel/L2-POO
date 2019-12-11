@@ -32,7 +32,7 @@ public class Result {
 	public void serializationSave(String fileName) {
 		ObjectOutputStream stream;
 		try {
-			stream = new ObjectOutputStream(new FileOutputStream(fileName));
+			stream = new ObjectOutputStream(new FileOutputStream(fileName, true));
 			stream.writeObject(fileInfos + analysisResults);
 			stream.close();
 		} catch (FileNotFoundException e) {
