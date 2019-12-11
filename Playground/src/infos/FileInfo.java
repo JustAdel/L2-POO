@@ -4,6 +4,9 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.tika.Tika;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * @author Adel
@@ -33,7 +36,15 @@ public class FileInfo extends File {
 
 	public String getMimeUsingTika(String fileName) {
 		Tika tika = new Tika();
-		return tika.detect(fileName);
+		String tmp="";
+		try {
+			tmp = tika.detect(this.toPath());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return tmp;
+
 	}
 
 	public String getFileExtension() {
