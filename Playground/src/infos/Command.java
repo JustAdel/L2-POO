@@ -43,6 +43,7 @@ public class Command {
 			
 			if (commands.length == 4 && commands[2].equals("-s") ) 		
 				analysisResult.save(commands[3]);
+				//analysisResult.serializationSave(commands[3]);
 
 		} catch (FileNotFoundException e) {
 			System.err.println(e.getMessage());
