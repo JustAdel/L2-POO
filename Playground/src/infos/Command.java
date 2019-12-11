@@ -33,8 +33,8 @@ public class Command {
 		}
 	}
 
-	public Result fileAnalysis(String fileName) {
-		Result analysisResult = null;
+	public void fileAnalysis(String fileName) {
+		Result analysisResult;
 		try {
 			FileInfo file = new FileInfo(fileName);
 			AnalysisPushed fileAnalysis = new AnalysisPushed(file);
@@ -48,7 +48,7 @@ public class Command {
 		} catch (FileNotFoundException e) {
 			System.err.println(e.getMessage());
 		}
-		return analysisResult;
+		//return analysisResult;
 
 	}
 
