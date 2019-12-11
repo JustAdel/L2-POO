@@ -11,14 +11,6 @@ public class Result {
 	
 	public Result (AnalysisPushed fileAnalysis) {
 		an = fileAnalysis;
-		/*if (an.foundExtensionInDatabase()) {
-			// Si l'extension ne fait pas partie de la base de données, on ne dispose pas
-			// d'informations, l'analyse n'est pas effectuée:
-			// Les méthodes qui utilisent la base, ne sont pas appelées.
-			matchingMimeType  = an.checkMime();
-			foundFileSignature = an.searchSignatureInFile();		
-		}*/
-		
 	}
 	
 	public void save(String fileName) {
