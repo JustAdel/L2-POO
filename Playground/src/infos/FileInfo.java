@@ -2,7 +2,6 @@ package infos;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.tika.Tika;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -11,32 +10,32 @@ import java.io.IOException;
  * 
  * 
  */
-public class FileInfo extends File {
+public class FileInfo extends ToScan {
 	private String fileExtension;
 	private String fileMimeType;
 	private long fileLength;
 
-	public FileInfo(String fileName) throws FileNotFoundException {
-		super(fileName);
-		if (this.exists() && this.isFile()) {
+	public FileInfo(String pathname) throws FileNotFoundException, NotAFileException {
+		super(pathname);
+		if (this.isFile()) {
 			fileExtension = getExtensionUsingApacheCommonLib(getName());
 			fileMimeType = getMimeUsingTika(getName());
 			fileLength = length();
 		} else {
-			throw new FileNotFoundException(fileName + " was not found or is not a file.");
+			throw new NotAFileException(pathname);
 		}
 	}
 
-	public String getExtensionUsingApacheCommonLib(String fileName) {
-		return FilenameUtils.getExtension(fileName);
+	public String getExtensionUsingApacheCommonLib(String pathname) {
+		return FilenameUtils.getExtension(pathname);
 
 	}
 
-	public String getMimeUsingTika(String fileName) {
+	public String getMimeUsingTika(String pathname) {
 		Tika tika = new Tika();
 		String tmp = "";
 		try {
-			tmp = tika.detect(this.toPath()); //à commenter.
+			tmp = tika.detect(this.toPath()); // à commenter.
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -51,8 +50,20 @@ public class FileInfo extends File {
 		return fileMimeType;
 	}
 
-	public boolean estVideFile() {
+	public boolean isEmpty() {
 		return fileLength == 0;
+	}
+
+	public void scan() {
+		Result analysisResult;
+		AnalysisPushed fileAnalysis = new AnalysisPushed(this);
+		analysisResult = new Result(fileAnalysis);
+		System.out.println(analysisResult.toString());
+		/*
+		 * if (commands.length == 4 && commands[2].equals("-s")) {
+		 * analysisResult.save(commands[3] + ".txt");
+		 * analysisResult.serializationSave(commands[3] + ".ser"); }
+		 */
 	}
 
 	public String toString() {

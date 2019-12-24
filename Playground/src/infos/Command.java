@@ -1,8 +1,6 @@
 package infos;
 
 import java.io.FileNotFoundException;
-import java.util.Iterator;
-import java.io.File;
 
 public class Command {
 	private String[] commands;
@@ -19,7 +17,7 @@ public class Command {
 			// efficace à partir d'instructions switch qui utilisent des objets String, qu'à
 			// partir d'instructions if-then-else chaînées.
 			// La méthode toLowerCase est utilisée pour rendre l'utilisation des commandes
-			// insensible à la case.
+			// insensible à la casse.
 			case "-f":
 				fileAnalysis(commands[1]);
 				break;
@@ -38,33 +36,24 @@ public class Command {
 		}
 	}
 
-	public void fileAnalysis(String fileName) {
-		Result analysisResult;
+	public void fileAnalysis(String pathName) {
 		try {
-			FileInfo file = new FileInfo(fileName);
-			AnalysisPushed fileAnalysis = new AnalysisPushed(file);
-			analysisResult = new Result(fileAnalysis);
-			System.out.println(analysisResult.toString());
-
-			if (commands.length == 4 && commands[2].equals("-s")) {
-				analysisResult.save(commands[3] + ".txt");
-				analysisResult.serializationSave(commands[3] + ".ser");
-			}
-
+			FileInfo file = new FileInfo(pathName);
+			file.scan();
 		} catch (FileNotFoundException e) {
+			System.err.println(e.getMessage());
+		} catch (NotAFileException e) {
 			System.err.println(e.getMessage());
 		}
 	}
 
-	public void folderAnalysis(String folderName) {
+	public void folderAnalysis(String pathName) {
 		try {
-			Folder folder = new Folder(folderName);
-			Iterator<File> iter = folder.getArray().iterator();
-			while (iter.hasNext()) {
-				fileAnalysis(iter.next().getPath());
-				System.out.println("-----------------------------");
-			}
+			Folder folder = new Folder(pathName);
+			folder.scan();
 		} catch (FileNotFoundException e) {
+			System.err.println(e.getMessage());
+		} catch (NotADirectoryException e) {
 			System.err.println(e.getMessage());
 		}
 	}
