@@ -1,18 +1,18 @@
-html;text/html;<!DOCTYPE html>
-sh;text/x-script.sh;#!/bin/
-sh;application/x-shar;#!/bin/
-sh;application/x-sh;#!/bin/
-sh;application/x-bsh;#!/bin/
-zip;application/zip;PK
-zip;application/x-zip-compressed;PK
-zip;multipart/x-zip;PK
-zip;application/x-compressed;PK
-docx;application/vnd.openxmlformats-officedocument.wordprocessingml.document;PK
-xlsx;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;PK
-pptx;application/vnd.openxmlformats-officedocument.presentationml.presentation;PK
-odp;application/vnd.oasis.opendocument.presentation;PK
-ods;application/vnd.oasis.opendocument.spreadsheet;PK
-odt;application/vnd.oasis.opendocument.text;PK
-txt;text/plain;
-jpg;image/jpeg;ÿØÿ
-png;image/png;‰PNG
+html;text/html;<!DOCTYPE html>;
+sh;text/x-script.sh;#!/bin/;
+sh;application/x-shar;#!/bin/;
+sh;application/x-sh;#!/bin/;
+sh;application/x-bsh;#!/bin/;
+zip;application/zip;PK;z
+zip;application/x-zip-compressed;PK;z
+zip;multipart/x-zip;PK;z
+zip;application/x-compressed;PK;z
+docx;application/vnd.openxmlformats-officedocument.wordprocessingml.document;PK;z
+xlsx;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;PK;z
+pptx;application/vnd.openxmlformats-officedocument.presentationml.presentation;PK;z
+odp;application/vnd.oasis.opendocument.presentation;PK;z
+ods;application/vnd.oasis.opendocument.spreadsheet;PK;z
+odt;application/vnd.oasis.opendocument.text;PK;z
+txt;text/plain;;
+jpg;image/jpeg;ÿØÿ;i
+png;image/png;‰PNG;i

@@ -13,6 +13,11 @@ import java.util.zip.ZipInputStream;
 
 public class ZipIntegrity implements IntegrityInterface{
 	private boolean unzippedFile;
+	
+	public ZipIntegrity(File file) {
+		unzippedFile = validatedIntegrity(file);
+	}
+	
 	public boolean validatedIntegrity(File file) {
 		unzippedFile = false;
 		try {

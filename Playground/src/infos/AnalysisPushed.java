@@ -1,34 +1,37 @@
 package infos;
 
 public class AnalysisPushed extends Analysis {
-	private Boolean unzippedFile;
-	private Boolean special = false;
+	IntegrityInterface integrity;
 
-	public AnalysisPushed(FileInfo file1) {
-		super(file1);
-		if (file1.getFileExtension().equals("zip")) {
-			special = true;
-			unzip();
-		} else {
-			if (file1.getFileExtension().toString().equals("jpg")|| file1.getFileExtension().toString().equals("png")) {
-				special = true;
-				dim();
+	public AnalysisPushed(FileInfo file) {
+		super(file);
+		try {
+			checkIntegrity(file);
+		} catch (NoTestAvailableException e) {
+			System.err.println(e.getMessage());
+		}
+	}
+
+	public void checkIntegrity(FileInfo file) throws NoTestAvailableException {
+		if (getExtensionInfos().length > 3) {
+			switch (getExtensionInfos()[3]) {
+			case "i": // image
+				integrity = new ImageIntegrity(getFile());
+				break;
+			case "z": // archive
+				integrity = new ZipIntegrity(getFile());
+				break;
+			default:
+				throw new NoTestAvailableException(file.getFileExtension());
 			}
 		}
 	}
 
-
-	
 	public String toString() {
 		String tmp = super.toString();
-		if(special) {
-			if(getFile().getFileExtension().equals("zip")) {
-				tmp += "Unzipped: " + unzippedFile + "\n";
-			}else {
-				tmp += dim();
-			}
+		if (integrity != null) {
+			tmp += integrity.toString();
 		}
 		return tmp;
 	}
-
 }

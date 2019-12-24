@@ -9,6 +9,12 @@ import javax.imageio.ImageIO;
 public class ImageIntegrity implements IntegrityInterface{
 	private int width;
 	private int height;
+	private boolean isImage;
+	
+	public ImageIntegrity(File file) {
+		this.isImage = validatedIntegrity(file);
+	}
+	
 	public boolean validatedIntegrity(File file) {
 		boolean isImage = false;		
 		try {
@@ -25,7 +31,7 @@ public class ImageIntegrity implements IntegrityInterface{
 	}
 	public String toString() {
 		String tmp = "";
-		tmp += "dimensions : width = " + width + " height = " + height +"\n";
+		tmp += "isImage : "+ isImage + "\tdimensions : width = " + width + " height = " + height +"\n";
 		return tmp;
 	}
 }
