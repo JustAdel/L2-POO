@@ -21,6 +21,8 @@ import javax.swing.JToggleButton;
 import infos.FileInfo;
 import infos.AnalysisPushed;
 import infos.Result;
+import infos.ToScan;
+import infos.ToScanList;
 import infos.UnknownCommandException;
 import infos.ExtensionNotFoundException;
 import infos.Folder;
@@ -48,12 +50,12 @@ public class PrototypeGUI extends JFrame {
 	private JPanel linePanel1;
 	private JPanel linePanel3;
 
-	private Folder analysisList;
+	private ToScanList analysisList;
 	
 	public PrototypeGUI(String title) {
 		super(title);
 
-		analysisList = new Folder();
+		analysisList = new ToScanList();
 		
 		initStyle();
 
@@ -122,9 +124,8 @@ public class PrototypeGUI extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			String filePath = filePathField.getText();
 			if ((!filePath.equals(""))) {
-				try {  //GIGA POP
-					Folder toBeAdded = new Folder(filePath);
-					analysisList.setFolder(toBeAdded.getFolder());
+				try {  
+					//ToScan file = new ToScan();
 					analysisList.addToList(toBeAdded.getFolder());
 					updateStandardMessage(filePath + " was added to the list.");
 					//Pour l'instant on analyse un seul objet à la fois.
