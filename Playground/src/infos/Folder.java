@@ -42,22 +42,22 @@ public class Folder extends ToScan {
 		return files;
 	}
 
-	public void scan() {
-		try {
-			Iterator<File> iter = getArray().iterator();
-			while (iter.hasNext()) {
-				FileInfo file;
-				try {
-					file = new FileInfo(iter.next().getPath());
-					file.scan();
-					System.out.println("-----------------------------");
-				} catch (NotAFileException e) {
-					System.err.println(e.getMessage());
-				}
+	public ResultList scan() {
+		ResultList results = new ResultList();
+		
+		Iterator<File> iter = getArray().iterator();
+		while (iter.hasNext()) {
+			FileInfo file;
+			try {
+				file = new FileInfo(iter.next().getPath());
+				results.add(file.scan());
+			} catch (NotAFileException e) {
+				System.err.println(e.getMessage());
+			} catch (FileNotFoundException e) {
+				System.err.println(e.getMessage());
 			}
-		} catch (FileNotFoundException e) {
-			System.err.println(e.getMessage());
 		}
+		return results;
 	}
 
 	public String toString() {

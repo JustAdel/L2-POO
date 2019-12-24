@@ -11,5 +11,5 @@ public abstract class ToScan extends File {
 			throw new FileNotFoundException("File not found");
 	}
 
-	public abstract void scan();
+	//public abstract ResultList scan();
 }

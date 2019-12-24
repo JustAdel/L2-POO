@@ -4,7 +4,8 @@ import java.io.FileNotFoundException;
 
 public class Command {
 	private String[] commands;
-
+	private ResultList results = new ResultList();
+	
 	public Command(String[] commands) {
 		this.commands = commands;
 
@@ -39,7 +40,7 @@ public class Command {
 	public void fileAnalysis(String pathName) {
 		try {
 			FileInfo file = new FileInfo(pathName);
-			file.scan();
+			results.add(file.scan());
 		} catch (FileNotFoundException e) {
 			System.err.println(e.getMessage());
 		} catch (NotAFileException e) {
@@ -50,12 +51,16 @@ public class Command {
 	public void folderAnalysis(String pathName) {
 		try {
 			Folder folder = new Folder(pathName);
-			folder.scan();
+			results.add(folder.scan());
 		} catch (FileNotFoundException e) {
 			System.err.println(e.getMessage());
 		} catch (NotADirectoryException e) {
 			System.err.println(e.getMessage());
 		}
+	}
+	
+	public ResultList getResults() {
+		return results;
 	}
 
 	public void help() {

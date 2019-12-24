@@ -54,16 +54,15 @@ public class FileInfo extends ToScan {
 		return fileLength == 0;
 	}
 
-	public void scan() {
-		Result analysisResult;
+	public Result scan() {
 		AnalysisPushed fileAnalysis = new AnalysisPushed(this);
-		analysisResult = new Result(fileAnalysis);
-		System.out.println(analysisResult.toString());
+		Result analysisResult = new Result(fileAnalysis);
 		/*
 		 * if (commands.length == 4 && commands[2].equals("-s")) {
 		 * analysisResult.save(commands[3] + ".txt");
 		 * analysisResult.serializationSave(commands[3] + ".ser"); }
 		 */
+		return analysisResult;
 	}
 
 	public String toString() {

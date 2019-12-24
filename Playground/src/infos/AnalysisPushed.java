@@ -13,7 +13,7 @@ public class AnalysisPushed extends Analysis {
 	}
 
 	public void checkIntegrity(FileInfo file) throws NoTestAvailableException {
-		if (getExtensionInfos().length > 3) {
+		if (getExtensionInfos()!= null && getExtensionInfos().length > 3) {
 			switch (getExtensionInfos()[3]) {
 			case "i": // image
 				integrity = new ImageIntegrity(getFile());
