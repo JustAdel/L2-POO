@@ -4,9 +4,11 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class Scan {
-	private static String DATABASE = "C:\\mnt\\c\\Users\\Adel\\git\\L2-POO\\Playground\\resources\\signatures.csv";
+	private static String DATABASE = "/signatures.csv";
 	public final static String SEPARATOR = ";";
 	protected FileInfo file;
 	private String[] extensionInfos;
@@ -29,7 +31,8 @@ public class Scan {
 		String line, fields[] = null;
 		foundExtensionInDatabase = false;
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(DATABASE));
+			InputStream in = getClass().getResourceAsStream(DATABASE); 
+			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 			while (((line = reader.readLine()) != null) && (!foundExtensionInDatabase)) {
 				fields = line.split(SEPARATOR);
 				if (fields[0].equals(file.getFileExtension())) {
