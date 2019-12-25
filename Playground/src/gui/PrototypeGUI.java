@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileSystemView;
 
+import infos.ResultSave;
 //import infos.Result;
 import infos.ToScanList;
 
@@ -41,10 +42,11 @@ public class PrototypeGUI extends JFrame {
 	private JPanel linePanel1;
 	private JPanel linePanel3;
 	private JPanel linePanel4;
-	private JPanel linePanel5;
+	private EnquiriesPanel linePanel5;
 	
 	private ToScanList analysisList = new ToScanList();
-
+	private ResultSave results = new ResultSave();
+	
 	public PrototypeGUI(String title) {
 		super(title);
 
@@ -59,6 +61,7 @@ public class PrototypeGUI extends JFrame {
 
 	protected void initActions() {
 		addButton.addActionListener(new AddAction());
+		runButton.addActionListener(new RunScanAction());
 	}
 
 	protected void initStyle() {
@@ -108,9 +111,8 @@ public class PrototypeGUI extends JFrame {
 
 		// Fifth line
 		
-		linePanel5 = new JPanel();
-		linePanel5.setSize(500, 100);
-		linePanel5.add(instructionLabel);
+		linePanel5 = new EnquiriesPanel(analysisList);
+		linePanel5.layoutEnquiries(analysisList);
 		contentPane.add(linePanel5);
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -134,7 +136,7 @@ public class PrototypeGUI extends JFrame {
 				analysisList.addToScanList(jfc.getSelectedFile());// try catch à ajouter				
 				
 				linePanel5.removeAll();
-				linePanel5.add(new EnquiryPanel(analysisList.getScanList().get(0)));
+				linePanel5.layoutEnquiries(analysisList);
 				runButton.setEnabled(true);
 				
 				revalidate();
@@ -142,6 +144,15 @@ public class PrototypeGUI extends JFrame {
 			}
 		}
 	}
+	
+	private class RunScanAction implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+		}
+	}
+	
+	
 	/*
 	 * private void updateStandardMessage(String message) {
 	 * messageLabel.setForeground(MESSAGE_STANDARD_COLOR);

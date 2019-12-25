@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import infos.ToScan;
+import infos.ToScanList;
 
 public class EnquiryPanel extends JPanel {
 
@@ -18,11 +19,16 @@ public class EnquiryPanel extends JPanel {
 	protected JLabel filePathLabel;
 
 	protected JButton removeButton = new JButton("x");
-
-	public EnquiryPanel(ToScan list) {
+	
+	private ToScanList list;
+	private ToScan file;
+	
+	public EnquiryPanel(ToScan file, ToScanList list) {
 		super();
-
-		filePathLabel = new JLabel(list.getPath().toString());
+		
+		this.list = list;
+		this.file = file;
+		filePathLabel = new JLabel(file.getPath().toString());
 
 		initStyle();
 
@@ -50,7 +56,10 @@ public class EnquiryPanel extends JPanel {
 	private class RemoveAction implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
+			list.remove(file);
+			removeAll();
+			revalidate();
+			repaint();
 		}
 	}
 }

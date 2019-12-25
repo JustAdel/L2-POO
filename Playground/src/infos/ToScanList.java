@@ -48,12 +48,24 @@ public class ToScanList {
 		filesToScan.remove(file);
 	}
 	
+	public void clear() {
+		filesToScan.clear();
+	}
+	
 	public int getToScanListCount() {
 		return filesToScan.size();
 	}
 	
 	public boolean isEmpty() {
 		return filesToScan.isEmpty();
+	}
+	
+	public ResultSave scan(ToScanList list){
+		ResultSave results = new ResultSave();
+		for (ToScan file : list.getScanList()) {
+			results.add(file.scan());
+		}
+		return results;
 	}
 	
 	public String toString() {
