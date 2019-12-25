@@ -10,7 +10,7 @@ public class Folder extends ToScan {
 
 	public Folder(String pathName) throws FileNotFoundException, NotADirectoryException {
 		super(pathName);
-		if (this.isDirectory()) {
+		if (isDirectory()) {
 			files = new ArrayList<File>();
 			addToList(this);
 		} else {
@@ -44,7 +44,7 @@ public class Folder extends ToScan {
 
 	public ResultList scan() {
 		ResultList results = new ResultList();
-		
+
 		Iterator<File> iter = getArray().iterator();
 		while (iter.hasNext()) {
 			FileInfo file;

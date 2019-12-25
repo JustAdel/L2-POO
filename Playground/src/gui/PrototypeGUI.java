@@ -17,6 +17,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileSystemView;
 
 import infos.FileInfo;
 import infos.ScanInDepth;
@@ -26,6 +28,7 @@ import infos.ToScanList;
 import infos.UnknownCommandException;
 import infos.ExtensionNotFoundException;
 import infos.Folder;
+import infos.NotADirectoryException;
 import infos.Command;
 
 public class PrototypeGUI extends JFrame {
@@ -65,7 +68,7 @@ public class PrototypeGUI extends JFrame {
 	}
 
 	protected void initActions() {
-		//addButton.addActionListener(new AddAction());
+		addButton.addActionListener(new AddAction());
 	}
 
 	protected void initStyle() {
@@ -105,7 +108,7 @@ public class PrototypeGUI extends JFrame {
 		contentPane.add(linePanel3);
 
 		// Fourth line
-		runButton.setEnabled(false); // The user can't run the analysis until appropriate objets (either files or
+		runButton.setEnabled(false); // The user can't run the scan until appropriate objets (either files or
 										// folders) are added.
 		contentPane.add(runButton);
 		// Fifth line
@@ -117,37 +120,35 @@ public class PrototypeGUI extends JFrame {
 		pack();
 		setVisible(true);
 	}
-/*
+
 	private class AddAction implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			String filePath = filePathField.getText();
-			if ((!filePath.equals(""))) {
-				try {  
-					//ToScan file = new ToScan();
-					analysisList.addToList(toBeAdded.getFolder());
-					updateStandardMessage(filePath + " was added to the list.");
-					//Pour l'instant on analyse un seul objet à la fois.
-					runButton.setEnabled(true);
-				} catch (FileNotFoundException e1) {
-					updateErrorMessage(e1.getMessage());
-				}
-			} else {
-				updateErrorMessage("Incomplete information !");
+			
+			
+			JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+			jfc.setDialogTitle("Choose a file or a directory to scan: ");
+			jfc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+
+			int returnValue = jfc.showSaveDialog(null);
+			if (returnValue == JFileChooser.APPROVE_OPTION) {
+				analysisList.addToScanList(jfc.getSelectedFile());
+				updateStandardMessage("Element added !");
 			}
+
 		}
 	}
-	*/
+
 	private void updateStandardMessage(String message) {
 		messageLabel.setForeground(MESSAGE_STANDARD_COLOR);
 		messageLabel.setText(message);
 	}
-
+	/*
 	private void updateErrorMessage(String message) {
 		messageLabel.setForeground(MESSAGE_ERROR_COLOR);
 		messageLabel.setText(message);
-	}
+	}*/
 
 	public static void main(String[] args) {
 		new PrototypeGUI("Prototype GUI");

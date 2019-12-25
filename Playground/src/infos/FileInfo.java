@@ -17,7 +17,7 @@ public class FileInfo extends ToScan {
 
 	public FileInfo(String pathname) throws FileNotFoundException, NotAFileException {
 		super(pathname);
-		if (this.isFile()) {
+		if (isFile()) {
 			fileExtension = getExtensionUsingApacheCommonLib(getName());
 			fileMimeType = getMimeUsingTika(getName());
 			fileLength = length();
@@ -35,7 +35,7 @@ public class FileInfo extends ToScan {
 		Tika tika = new Tika();
 		String tmp = "";
 		try {
-			tmp = tika.detect(this.toPath()); // à commenter.
+			tmp = tika.detect(toPath()); // à commenter.
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -61,7 +61,7 @@ public class FileInfo extends ToScan {
 	}
 
 	public String toString() {
-		return "File name: " + super.getName() + "\nCharacteristics:\n" + "\tExtension: " + fileExtension
+		return "File name: " + getName() + "\nCharacteristics:\n" + "\tExtension: " + fileExtension
 				+ "\n\tMIME type: " + fileMimeType + "\n\tlength: " + fileLength + "\n";
 
 	}
