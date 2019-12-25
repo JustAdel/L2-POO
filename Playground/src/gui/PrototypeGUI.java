@@ -41,7 +41,8 @@ public class PrototypeGUI extends JFrame {
 	private JPanel linePanel1;
 	private JPanel linePanel3;
 	private JPanel linePanel4;
-
+	private JPanel linePanel5;
+	
 	private ToScanList analysisList = new ToScanList();
 
 	public PrototypeGUI(String title) {
@@ -63,8 +64,6 @@ public class PrototypeGUI extends JFrame {
 	protected void initStyle() {
 		titleLabel.setFont(TITLE_LABEL_FONT);
 		instructionLabel.setFont(LABEL_FONT);
-
-		// filePathField.setFont(TEXT_FIELD_FONT);
 
 		addButton.setFont(BUTTON_FONT);
 		runButton.setFont(BUTTON_FONT);
@@ -108,7 +107,12 @@ public class PrototypeGUI extends JFrame {
 		// Encapsuler les boutons dans le même container...
 
 		// Fifth line
-
+		
+		linePanel5 = new JPanel();
+		linePanel5.setSize(500, 100);
+		linePanel5.add(instructionLabel);
+		contentPane.add(linePanel5);
+		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(500, 480);
 		setResizable(false);
@@ -124,19 +128,19 @@ public class PrototypeGUI extends JFrame {
 			JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 			jfc.setDialogTitle("Choose a file or a directory to scan: ");
 			jfc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-
+			
 			int returnValue = jfc.showSaveDialog(null);
 			if (returnValue == JFileChooser.APPROVE_OPTION) {
-				analysisList.addToScanList(jfc.getSelectedFile());// try catch à ajouter.
-				// updateStandardMessage("Element added !");
-				updateListDisplay();
+				analysisList.addToScanList(jfc.getSelectedFile());// try catch à ajouter				
+				
+				linePanel5.removeAll();
+				linePanel5.add(new EnquiryPanel(analysisList.getScanList().get(0)));
 				runButton.setEnabled(true);
+				
+				revalidate();
+				repaint();
 			}
 		}
-	}
-
-	private void updateListDisplay() {
-
 	}
 	/*
 	 * private void updateStandardMessage(String message) {
