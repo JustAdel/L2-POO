@@ -22,17 +22,18 @@ public class PrototypeGUI extends JFrame {
 
 	private static final Font MESSAGE_FONT = new Font(Font.SANS_SERIF, Font.ITALIC, 20);
 	private static final Font BUTTON_FONT = new Font(Font.DIALOG, Font.BOLD, 20);
-	//private static final Font TEXT_FIELD_FONT = new Font(Font.MONOSPACED, Font.BOLD, 20);
+	// private static final Font TEXT_FIELD_FONT = new Font(Font.MONOSPACED,
+	// Font.BOLD, 20);
 	private static final Font LABEL_FONT = new Font(Font.MONOSPACED, Font.BOLD, 12);
 	private static final Font TITLE_LABEL_FONT = new Font(Font.MONOSPACED, Font.BOLD, 20);
 	private static final Color MESSAGE_STANDARD_COLOR = Color.BLUE;
-	//private static final Color MESSAGE_ERROR_COLOR = Color.RED;
+	// private static final Color MESSAGE_ERROR_COLOR = Color.RED;
 
 	protected JLabel titleLabel = new JLabel("Analyse");
 	protected JLabel instructionLabel = new JLabel("Ajoutez des objets.");
 	protected JLabel messageLabel = new JLabel("Everything is OK ! ");
 
-	//protected JTextField filePathField = new JTextField(30);
+	// protected JTextField filePathField = new JTextField(30);
 
 	protected JButton addButton = new JButton("+ Add");
 	protected JButton runButton = new JButton("> Run Scan");
@@ -40,14 +41,14 @@ public class PrototypeGUI extends JFrame {
 	private JPanel linePanel1;
 	private JPanel linePanel3;
 	private JPanel linePanel4;
-	
+
 	private ToScanList analysisList = new ToScanList();
-	
+
 	public PrototypeGUI(String title) {
 		super(title);
 
 		analysisList = new ToScanList();
-		
+
 		initStyle();
 
 		initLayout();
@@ -63,7 +64,7 @@ public class PrototypeGUI extends JFrame {
 		titleLabel.setFont(TITLE_LABEL_FONT);
 		instructionLabel.setFont(LABEL_FONT);
 
-		//filePathField.setFont(TEXT_FIELD_FONT);
+		// filePathField.setFont(TEXT_FIELD_FONT);
 
 		addButton.setFont(BUTTON_FONT);
 		runButton.setFont(BUTTON_FONT);
@@ -85,33 +86,33 @@ public class PrototypeGUI extends JFrame {
 		contentPane.add(linePanel1);
 
 		// Second line
-		//contentPane.add(instructionLabel);
+		// contentPane.add(instructionLabel);
 
 		// Third line
 		linePanel3 = new JPanel();
 		linePanel3.setSize(500, 100);
 		linePanel3.setLayout(new FlowLayout(FlowLayout.CENTER));
 		linePanel3.add(addButton);
-		//linePanel3.add(filePathField);
+		// linePanel3.add(filePathField);
 		contentPane.add(linePanel3);
 
 		// Fourth line
-		
+
 		linePanel4 = new JPanel();
 		linePanel4.setSize(500, 100);
 		linePanel4.setLayout(new FlowLayout(FlowLayout.CENTER));
-		runButton.setEnabled(false); // The user can't run the scan until appropriate objets (either files or folders are added)
+		runButton.setEnabled(false); // The user can't run the scan until appropriate objets (either files or folders
+										// are added)
 		linePanel4.add(runButton);
 		contentPane.add(linePanel4);
 		// Encapsuler les boutons dans le même container...
-		
+
 		// Fifth line
-		
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(500, 480);
 		setResizable(false);
-		//pack();
+		// pack();
 		setVisible(true);
 	}
 
@@ -119,16 +120,15 @@ public class PrototypeGUI extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
-			
+
 			JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 			jfc.setDialogTitle("Choose a file or a directory to scan: ");
 			jfc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 
 			int returnValue = jfc.showSaveDialog(null);
 			if (returnValue == JFileChooser.APPROVE_OPTION) {
-				analysisList.addToScanList(jfc.getSelectedFile());//try catch à ajouter.
-				//updateStandardMessage("Element added !");
+				analysisList.addToScanList(jfc.getSelectedFile());// try catch à ajouter.
+				// updateStandardMessage("Element added !");
 				updateListDisplay();
 				runButton.setEnabled(true);
 			}
@@ -139,15 +139,15 @@ public class PrototypeGUI extends JFrame {
 
 	}
 	/*
-	private void updateStandardMessage(String message) {
-		messageLabel.setForeground(MESSAGE_STANDARD_COLOR);
-		messageLabel.setText(message);
-	}*/
+	 * private void updateStandardMessage(String message) {
+	 * messageLabel.setForeground(MESSAGE_STANDARD_COLOR);
+	 * messageLabel.setText(message); }
+	 */
 	/*
-	private void updateErrorMessage(String message) {
-		messageLabel.setForeground(MESSAGE_ERROR_COLOR);
-		messageLabel.setText(message);
-	}*/
+	 * private void updateErrorMessage(String message) {
+	 * messageLabel.setForeground(MESSAGE_ERROR_COLOR);
+	 * messageLabel.setText(message); }
+	 */
 
 	public static void main(String[] args) {
 		new PrototypeGUI("Prototype GUI");
