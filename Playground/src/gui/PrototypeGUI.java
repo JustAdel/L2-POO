@@ -1,12 +1,12 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,7 +25,7 @@ public class PrototypeGUI extends JFrame {
 	
 	private final String DEFAULT_SAVE_FILE = "autosave.ser";
 
-	protected JLabel titleLabel = new JLabel("Selective Scan");
+	protected JLabel titleLabel = new JLabel("Scan App");
 
 	protected JButton addButton = new JButton("+ Add...");
 	protected JButton runButton = new JButton("> Run Scan");
@@ -61,38 +61,40 @@ public class PrototypeGUI extends JFrame {
 	}
 
 	protected void initLayout() {
-		GridLayout grid = new GridLayout(5, 1);
+		//GridLayout grid = new GridLayout(2, 1);
+		
+		BorderLayout border = new BorderLayout();
 		Container contentPane = getContentPane();
-		contentPane.setLayout(grid);
+		contentPane.setLayout(border);
 
 		// First line: Title
+		
+		
 		titleLabel.setHorizontalAlignment(JLabel.CENTER);
-		titleLabel.setVerticalAlignment(JLabel.TOP);
-		contentPane.add(titleLabel);
+		titleLabel.setVerticalAlignment(JLabel.CENTER);
+		contentPane.add(titleLabel, BorderLayout.NORTH);
 
 		// Second line: Buttons
 		buttonsPanel = new JPanel();
-		buttonsPanel.setSize(500, 100);
-		buttonsPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS));
 		buttonsPanel.add(addButton);
 		runButton.setEnabled(false);
 		buttonsPanel.add(runButton);
-		contentPane.add(buttonsPanel);
+		contentPane.add(buttonsPanel, BorderLayout.WEST);
 
 		// Third Component
 		eqPanel = new EnquiriesPanel(analysisList, runButton);
 		JScrollPane scrollPane = new JScrollPane(eqPanel);
-		contentPane.add(scrollPane);
+		contentPane.add(scrollPane, BorderLayout.CENTER);
 
 		// Fifth line
 		resultsPanel = new ResultsPanel(results);
-		contentPane.add(resultsPanel);
+		contentPane.add(resultsPanel, BorderLayout.SOUTH);
 		
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setSize(500, 480);
+		setSize(720, 480);
 		setResizable(false);
-		// pack();
 		setVisible(true);
 	}
 

@@ -99,7 +99,7 @@ public class ResultsPanel extends JPanel {
 
             frame.getContentPane().add(BorderLayout.CENTER, panel);
             frame.setSize(500, 480);
-            frame.pack();
+            //frame.pack();
             frame.setLocationByPlatform(true);
             frame.setVisible(true);
             frame.setResizable(false);
