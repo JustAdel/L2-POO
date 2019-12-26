@@ -2,11 +2,12 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,10 +19,15 @@ import javax.swing.filechooser.FileSystemView;
 import infos.ResultSave;
 import infos.ToScanList;
 
+/**
+ * @author Adel
+ *
+ */
+
 public class PrototypeGUI extends JFrame {
 
 	private static final Font BUTTON_FONT = new Font(Font.DIALOG, Font.BOLD, 20);
-	private static final Font TITLE_LABEL_FONT = new Font(Font.MONOSPACED, Font.BOLD, 20);
+	private static final Font TITLE_LABEL_FONT = new Font(Font.MONOSPACED, Font.BOLD, 24);
 	
 	private final String DEFAULT_SAVE_FILE = "autosave.ser";
 
@@ -33,7 +39,7 @@ public class PrototypeGUI extends JFrame {
 	protected JPanel buttonsPanel;
 	protected ResultsPanel resultsPanel;
 
-	protected EnquiriesPanel eqPanel;
+	protected EntriesPanel entPanel;
 
 	private ToScanList analysisList = new ToScanList();
 	private ResultSave results = new ResultSave();
@@ -61,77 +67,101 @@ public class PrototypeGUI extends JFrame {
 	}
 
 	protected void initLayout() {
-		//GridLayout grid = new GridLayout(2, 1);
 		
 		BorderLayout border = new BorderLayout();
 		Container contentPane = getContentPane();
 		contentPane.setLayout(border);
 
-		// First line: Title
-		
-		
+		//Title
 		titleLabel.setHorizontalAlignment(JLabel.CENTER);
 		titleLabel.setVerticalAlignment(JLabel.CENTER);
 		contentPane.add(titleLabel, BorderLayout.NORTH);
-
-		// Second line: Buttons
+		
+		
+		//Body
+		
+		JPanel bodyPanel = new JPanel();
+		GridLayout grid = new GridLayout(2, 1);
+		bodyPanel.setLayout(grid);
+		
+			//Before Scan:
+		JPanel intermediatePanel = new JPanel();
+		intermediatePanel.setLayout(new BorderLayout());
+		
+				//Buttons
 		buttonsPanel = new JPanel();
-		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS));
+		buttonsPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		buttonsPanel.add(addButton);
 		runButton.setEnabled(false);
 		buttonsPanel.add(runButton);
-		contentPane.add(buttonsPanel, BorderLayout.WEST);
+		
+				//Selected elements
+		entPanel = new EntriesPanel(analysisList, runButton);
+		entPanel.setSize(500, 250);
+		JScrollPane scrollPane = new JScrollPane(entPanel);
 
-		// Third Component
-		eqPanel = new EnquiriesPanel(analysisList, runButton);
-		JScrollPane scrollPane = new JScrollPane(eqPanel);
-		contentPane.add(scrollPane, BorderLayout.CENTER);
+		intermediatePanel.add(buttonsPanel, BorderLayout.NORTH);
+		intermediatePanel.add(scrollPane, BorderLayout.CENTER);
+		bodyPanel.add(intermediatePanel);
 
-		// Fifth line
+			//Results component
 		resultsPanel = new ResultsPanel(results);
-		contentPane.add(resultsPanel, BorderLayout.SOUTH);
+		bodyPanel.add(resultsPanel, BorderLayout.SOUTH);
 		
-		
+		contentPane.add(bodyPanel, BorderLayout.CENTER);
+
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setSize(720, 480);
-		setResizable(false);
+		setSize(600, 480);
+		//pack();
+		setResizable(true);
 		setVisible(true);
 	}
 
 	private class AddAction implements ActionListener {
 
+		/**
+		 *génère un JFileChooser
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
 			JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 			jfc.setDialogTitle("Choose a file or a directory to scan: ");
 			jfc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-
-			int returnValue = jfc.showSaveDialog(null);
+			//Ouvre une boite de dialogue personnalisée, avec un bouton de validation spécial.
+			int returnValue = jfc.showDialog(null, "Select");
 			if (returnValue == JFileChooser.APPROVE_OPTION) {
 				analysisList.addToScanList(jfc.getSelectedFile());
-				eqPanel.layoutEnquiries(analysisList);
-				revalidate();
-				repaint();
+				entPanel.layoutEntries(analysisList);
 			}
 		}
 	}
 
 	private class RunScanAction implements ActionListener {
+		/**
+		 *lance l'analyse
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			results.add(analysisList.scan());
 			analysisList.clear();
-			eqPanel.layoutEnquiries(analysisList);
+			entPanel.layoutEntries(analysisList);
 			updateResults();
 		}
 	}
 
+	/**
+	 * Met à jour le composant graphique responsable de l'affichage des résultats.
+	 */
 	private void updateResults() {
+		//On sauvegarde les résultats dans un fichier binaire.
 		results.serializationSave(DEFAULT_SAVE_FILE);
+		//On libère l'espace pour les éventuelles analyses futures.
 		results.clear();
+		//On consulte le fichier de sauvegarde...
 		ResultSave tmp = new ResultSave();
 		tmp.serializationRead(DEFAULT_SAVE_FILE);
+		//pour afficher les résultats de l'analyse.
 		resultsPanel.update(tmp);
 	}
 	
