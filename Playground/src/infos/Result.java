@@ -1,6 +1,8 @@
 package infos;
 
-public class Result {
+import java.io.Serializable;
+
+public class Result implements Serializable {
 
 	private String fileInfos;
 	private String analysisResults;
