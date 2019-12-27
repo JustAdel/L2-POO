@@ -45,7 +45,7 @@ public class ScannerGUI extends JFrame {
 	private ResultSave results = new ResultSave();
 
 	public ScannerGUI(String title) {
-		super(title);
+		//super(title);
 
 		analysisList = new ToScanList();
 
