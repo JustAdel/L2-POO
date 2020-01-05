@@ -33,14 +33,16 @@ public class EntryPanel extends JPanel {
 
 	private ToScanList list;
 	private ToScan file;
+	private EntriesPanel panel;
 
-	public EntryPanel(ToScan file, ToScanList list) {
+	public EntryPanel(ToScan file, ToScanList list, EntriesPanel panel) {
 		super();
 
 		this.list = list;
 		this.file = file;
+		this.panel = panel;
 		filePathLabel = new JLabel(file.getPath().toString());
-
+		
 		initStyle();
 
 		initLayout();
@@ -75,8 +77,7 @@ public class EntryPanel extends JPanel {
 			// On supprime les composants graphiques
 			removeAll();
 			// On rafraichit
-			revalidate();
-			repaint();
+			panel.layoutEntries(list);
 		}
 	}
 }

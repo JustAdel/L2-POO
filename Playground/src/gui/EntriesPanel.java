@@ -65,7 +65,7 @@ public class EntriesPanel extends JPanel {
 			add(tmp);
 			// Parcours de list
 			for (ToScan file : list.getScanList()) {
-				EntryPanel eqPanel = new EntryPanel(file, list);
+				EntryPanel eqPanel = new EntryPanel(file, list, this);
 				add(eqPanel);
 			}
 			runButton.setEnabled(true);
