@@ -16,12 +16,7 @@ import infos.ToScanList;
  * @author Adel Génère un JPanel correspondant à un élément sélectionné par
  *         l'utilisateur pour l'analyse (Chemin d'accès + boutton 'x').
  * 
- *         Permet également à l'utilisateur de déselectionner cet élément: Cette
- *         fonctionnalité (facultative) est encore en construction. Si nous ne
- *         sommes pas encore parvenus à mettre à jour correctement l'affichage,
- *         en particulier le runScanButton, les éléments déselectionnés sont
- *         bien supprimés de la liste d'éléments à analyser.
- *
+ *         Permet également à l'utilisateur de déselectionner cet élément.
  */
 public class EntryPanel extends JPanel {
 
